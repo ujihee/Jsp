@@ -26,7 +26,7 @@ try{
 	while(rs.next()){
 		
 		User1VO vo = new User1VO();
-		vo.setUser_id(rs.getNString(1));
+		vo.setUser_id(rs.getString(1));
 		vo.setName(rs.getString(2));
 		vo.setHp(rs.getString(3));
 		vo.setAge(rs.getInt(4));
