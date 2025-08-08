@@ -1,4 +1,4 @@
-package dto.student;
+package dto.college;
 
 public class CourseDTO {
 

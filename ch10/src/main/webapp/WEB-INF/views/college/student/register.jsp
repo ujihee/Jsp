@@ -31,13 +31,16 @@
 				</tr>
 				<tr>
 					<td>전공</td>
-					<td><select name="major">
-						<option value="">컴퓨터공학</option>
-						<option value=""></option>
-						<option value=""></option>
-						<option value=""></option>
-						<option value=""></option>
-					</select>
+					<td>
+						<select name="major">
+							<option>국문학과</option>
+							<option>영문학과</option>
+							<option>일문학과</option>
+							<option>중문학과</option>
+							<option>컴공학과</option>
+							<option>통계학과</option>
+							<option>수학학과</option>
+						</select>					
 					</td>
 				</tr>
 				<tr>

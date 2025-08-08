@@ -21,6 +21,13 @@
 				<th>입학일</th>
 				<th>관리</th>
 			</tr>
+			<c:forEach var="dto" items="${dtoList}">
+			<tr>
+				<td>
+			
+			
+			</tr>
+			</c:forEach>
 	
 		</table>		
 	</body>

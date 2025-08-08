@@ -1,52 +1,56 @@
-package controller.college.student;
+package controller.user1;
 
 import java.io.IOException;
 
-import dto.shop.CustomerDTO;
+import dto.user.User1DTO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import service.college.StudentService;
-import service.shop.CustomerService;
+import service.User.User1Service;
 
-@WebServlet("/college/student/register.do")
+@WebServlet("/user1/register.do")
 public class RegisterController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	
-	// 서비스 객체 가져오기
-	private StudentService service = StudentService.INSTANCE;
+	private User1Service service = User1Service.getInstance();
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/college/student/register.jsp");
-		dispatcher.forward(req, resp);
-	}
 	
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/user1/register.jsp");
+		dispatcher.forward(req, resp);	
+	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-		String cid = req.getParameter("cid");
+	
+		// 폼 입력 데이터 수신
+		String uid = req.getParameter("uid");
 		String name = req.getParameter("name");
 		String hp = req.getParameter("hp");
-		String address = req.getParameter("address");
-		String rdate = req.getParameter("rdate");
+		String age = req.getParameter("age");
 		
-		CustomerDTO dto = new CustomerDTO();
-		dto.setCid(cid);
+		// DTO 생성
+		User1DTO dto = new User1DTO();
+		dto.setUid(uid);
 		dto.setName(name);
 		dto.setHp(hp);
-		dto.setAddress(address);		
-		dto.setRdate(rdate);
+		dto.setAge(age);
 		
-		//service.register(dto);
+		// 서비스 호출
+		service.register(dto);
 		
-		resp.sendRedirect("/ch10/shop/customer/list.do");	
-	}	
+		// 목록 이동
+		resp.sendRedirect("/ch10/user1/list.do");
+	
+	}
+	
 }
+	
+	
+
+
