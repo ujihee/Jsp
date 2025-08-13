@@ -4,35 +4,55 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Shop/Customer::list</title>
+		<title>상품목록</title>
 	</head>
 	<body>
-		<h3>Shop/Customer 목록</h3>
+		<h3>상품목록</h3>
 		
-		<a href="/ch10">처음으로</a>
-		<a href="/ch10/shop/customer/register.do">등록하기</a>
+		<a href="/shopApp">처음으로</a>
+		<a href="/shopApp/product/register.do">등록하기</a>
 		
+		<c:if test="${empty sessUser}">
+		<form action="/shopApp/customer/login.do" method="post">
+			<input type="text" name="custid" style="width: 100px"/>
+			<input type="submit" value="로그인"/>
+		</form>
+		</c:if>
+		
+		<c:if test="${not empty sessUser}">
+		<p>
+			${sessUser.name}(${sessUser.custid})님 반갑습니다.
+			<a href="/shopApp/customer/logout.do">로그아웃</a>
+		</p>
+		</c:if>
 		<table border="1">
 			<tr>
-				<th>아이디</th>
-				<th>이름</th>
-				<th>휴대폰</th>
-				<th>주소</th>
-				<th>등록일</th>
-				<th>관리</th>
-			</tr>
-			<c:forEach var="customer" items="${dtoList}">	
+				<th>상품번호</th>
+				<th>상품명</th>
+				<th>재고량</th>
+				<th>가격</th>
+				<th>제조사</th>
+				<th>수량</th>
+				<th>주문</th>
+			</tr>			
 			<tr>
-				<td>${customer.cid}</td>
-				<td>${customer.name}</td>
-				<td>${customer.hp}</td>
-				<td>${customer.address}</td>
-				<td>${customer.rdate}</td>
-				<td>					
-					<a href="">수정</a>					
-					<a href="">삭제</a>
-				</td>
-			</tr>
+			<c:forEach var="product" items="${dtoList}">
+				<form action="/shopApp/order/register.do">
+					<tr>
+						<td>${product.prodNo}</td>
+						<td>${product.prodName}</td>
+						<td>${product.stock}</td>
+						<td>${product.price}</td>
+						<td>${product.company}</td>
+					<td>
+						<input type="hidden" name="prodNo" value="${product.prodNo}"/>					
+						<input type="number" name="prodCount" style="width: 40px" />									
+					</td>
+					<td>
+						<input type="submit" value="주문하기" />
+					</td>
+					</from>
+				</tr>
 			</c:forEach>
 		</table>		
 	</body>

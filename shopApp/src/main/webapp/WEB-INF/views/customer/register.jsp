@@ -3,19 +3,19 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Shop/Customer::register</title>
+		<title>회원등록</title>
 	</head>
 	<body>
-		<h3>Shop/Customer 등록</h3>
+		<h3>회원등록</h3>
 		
-		<a href="/ch10">처음으로</a>
-		<a href="/ch10/shop/customer/list.do">목록이동</a>
+		<a href="/shopApp">처음으로</a>
+		<a href="/shopApp/customer/list.do">목록이동</a>
 		
-		<form action="/ch10/shop/customer/register.do" method="post">
+		<form action="#" method="post">
 			<table border="1">
 				<tr>
 					<td>아이디</td>
-					<td><input type="text" name="cid" placeholder="아이디 입력"/></td>
+					<td><input type="text" name="custid" placeholder="아이디 입력"/></td>
 				</tr>
 				<tr>
 					<td>이름</td>
@@ -27,7 +27,7 @@
 				</tr>
 				<tr>
 					<td>주소</td>
-					<td><input type="text" name="address" placeholder="주소 입력"/></td>
+					<td><input type="text" name="addr" placeholder="주소 입력"/></td>
 				</tr>
 				<tr>
 					<td>등록일</td>
