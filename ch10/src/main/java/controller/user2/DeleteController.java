@@ -6,14 +6,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import service.User.User1Service;
+import service.User.User2Service;
 
-@WebServlet("/user1/delete.do")
+@WebServlet("/user2/delete.do")
 public class DeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	
-	private User1Service service = User1Service.getInstance();
+	private User2Service service = User2Service.getInstance();
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -25,7 +25,7 @@ public class DeleteController extends HttpServlet {
 		service.delete(uid);
 		
 		// 이동
-		resp.sendRedirect("/ch10/user1/list.do");
+		resp.sendRedirect("/ch10/user2/list.do");
 		
 	}
 	
