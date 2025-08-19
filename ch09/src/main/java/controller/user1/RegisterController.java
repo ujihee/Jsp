@@ -12,40 +12,42 @@ import jakarta.servlet.http.HttpServletResponse;
 import service.User1Service;
 
 @WebServlet("/user1/register.do")
-public class RegisterController extends HttpServlet{
-
+public class RegisterController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	//Service 싱글톤 객체 가져오기
-	private User1Service service = User1Service.getInstance();
 
+	// Service 싱글톤 객체 가져오기
+	private User1Service service = User1Service.getInstance();
+		
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/user1/register.jsp");
-		dispatcher.forward(req, resp);
+		dispatcher.forward(req, resp);		
 	}
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		//전송 데이터 수신
+	
+		// 전송 데이터 수신
 		String user_id = req.getParameter("user_id");
 		String name = req.getParameter("name");
 		String hp = req.getParameter("hp");
 		String age = req.getParameter("age");
 		
-		//서비스 전달을 위해 DTO 생성
+		// 서비스 전달을 위해 DTO 생성
 		User1DTO dto = new User1DTO();
 		dto.setUser_id(user_id);
-		dto.setName(name);;
+		dto.setName(name);
 		dto.setHp(hp);
 		dto.setAge(age);
 		
-		//서비스 요청
+		// 서비스 요청
 		service.register(dto);
 		
-		//이동
+		// 이동
 		resp.sendRedirect("/ch09/user1/list.do");
 		
 	}
+	
+	
 }

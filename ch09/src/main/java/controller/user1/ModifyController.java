@@ -12,9 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import service.User1Service;
 
 @WebServlet("/user1/modify.do")
-public class ModifyController extends HttpServlet{
-	
-
+public class ModifyController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private User1Service service = User1Service.getInstance();
