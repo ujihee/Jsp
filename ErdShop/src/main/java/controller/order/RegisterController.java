@@ -16,28 +16,27 @@ import service.OrderService;
 @WebServlet("/order/register.do")
 public class RegisterController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	private OrderService service = OrderService.INSTANCE;
 
+	private OrderService service = OrderService.INSTANCE;
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		String prodNo = req.getParameter("prodNo");
+		String prodNo    = req.getParameter("prodNo");
 		String prodCount = req.getParameter("prodCount");
-		//이제 오더테이블에 insert되야함
 		
-		//현재 사용자 세션 사용자 구하기
+		// 현재 사용자 세션 사용자 구하기
 		HttpSession session = req.getSession();
 		CustomerDTO sessUser = (CustomerDTO) session.getAttribute("sessUser");
 		
-		//dto 생성
+		// DTO 생성
 		OrderDTO dto = new OrderDTO();
 		dto.setOrderProduct(prodNo);
 		dto.setOrderCount(prodCount);
 		dto.setOrderId(sessUser.getCustid());
 		
-		//서비스 요청
-		service.register(dto);
+		// 서비스 요청
+		service.register(dto);		
 		
 		// 뷰 포워드
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/order/register.jsp");

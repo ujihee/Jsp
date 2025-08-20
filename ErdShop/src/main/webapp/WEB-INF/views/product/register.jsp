@@ -8,8 +8,8 @@
 	<body>
 		<h3>상품등록</h3>
 		
-		<a href="/shopApp">처음으로</a>
-		<a href="/shopApp/product/list.do">목록이동</a>
+		<a href="/ErdShop">처음으로</a>
+		<a href="/ErdShop/product/list.do">목록이동</a>
 		
 		<form action="#" method="post">
 			<table border="1">

@@ -9,8 +9,8 @@
 	<body>
 		<h3>회원목록</h3>
 		
-		<a href="/shopApp">처음으로</a>
-		<a href="/shopApp/customer/register.do">등록하기</a>
+		<a href="/ErdShop">처음으로</a>
+		<a href="/ErdShop/customer/register.do">등록하기</a>
 		
 		<table border="1">
 			<tr>

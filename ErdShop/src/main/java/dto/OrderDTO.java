@@ -1,7 +1,7 @@
 package dto;
 
 public class OrderDTO {
-	
+
 	private int orderNo;
 	private String orderId;
 	private int orderProduct;
@@ -26,23 +26,27 @@ public class OrderDTO {
 	public void setOrderProduct(int orderProduct) {
 		this.orderProduct = orderProduct;
 	}
+	
 	public void setOrderProduct(String orderProduct) {
 		if(orderProduct != null) {
-			this.orderProduct = Integer.parseInt(orderProduct);	
-		}
+			this.orderProduct = Integer.parseInt(orderProduct);
+		}		
 	}
-		
+	
 	public int getOrderCount() {
 		return orderCount;
 	}
 	public void setOrderCount(int orderCount) {
 		this.orderCount = orderCount;
 	}
+	
 	public void setOrderCount(String orderCount) {
 		if(orderCount != null) {
-			this.orderCount = Integer.parseInt(orderCount);
-		}
+			this.orderCount = Integer.parseInt(orderCount);	
+		}		
 	}
+	
+	
 	public String getOrderDate() {
 		return orderDate;
 	}
@@ -57,5 +61,5 @@ public class OrderDTO {
 	}
 	
 	
-
+	
 }

@@ -2,7 +2,6 @@ package controller.customer;
 
 import java.io.IOException;
 
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -14,20 +13,11 @@ import service.CustomerService;
 @WebServlet("/customer/logout.do")
 public class LogoutController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	private CustomerService service = CustomerService.INSTANCE;
 
+	private CustomerService service = CustomerService.INSTANCE;
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-	
-		
-		// 뷰 포워드
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/customer/list.jsp");
-		dispatcher.forward(req, resp);		
-	}
-	
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	
 		//로그아웃 처리
 		HttpSession session = req.getSession();
@@ -35,7 +25,15 @@ public class LogoutController extends HttpServlet {
 		session.removeAttribute("sessUser");
 		session.invalidate();
 		
-		//리다이렉트
-		resp.sendRedirect("/shopApp/product/list.do?logout=success");
+		// 리다이렉트
+		resp.sendRedirect("/ErdShop/product/list.do?logout=success");				
 	}	
 }
+
+
+
+
+
+
+
+

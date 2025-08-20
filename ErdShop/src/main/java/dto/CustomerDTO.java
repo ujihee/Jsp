@@ -44,6 +44,8 @@ public class CustomerDTO {
 		return "CustomerDTO [custid=" + custid + ", name=" + name + ", hp=" + hp + ", addr=" + addr + ", rdate=" + rdate
 				+ "]";
 	}
-
 	
+	
+	
+
 }

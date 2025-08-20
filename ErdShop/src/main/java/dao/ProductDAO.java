@@ -6,19 +6,18 @@ import java.util.List;
 import dto.ProductDTO;
 import util.DBHelper;
 
-public class ProductDAO extends DBHelper{
+public class ProductDAO extends DBHelper {
 	
 	private static final ProductDAO INSTANCE = new ProductDAO();
-	
 	public static ProductDAO getInstance() {
 		return INSTANCE;
 	}
 	private ProductDAO() {}
-
+	
+	// 기본 CRUD 메서드
 	public void insertProduct(ProductDTO dto) {
 		
 	}
-	
 	public ProductDTO selectProduct(int prodNo) {
 		return null;
 	}
@@ -28,9 +27,8 @@ public class ProductDAO extends DBHelper{
 		
 		try {
 			conn = getConnection();
-			String sql = "SELECT * FROM PRODUCT";
-			psmt = conn.prepareStatement(sql);
-			rs = psmt.executeQuery();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery("SELECT * FROM PRODUCT");
 			
 			while(rs.next()) {
 				ProductDTO dto = new ProductDTO();
@@ -38,16 +36,20 @@ public class ProductDAO extends DBHelper{
 				dto.setProdName(rs.getString(2));
 				dto.setStock(rs.getInt(3));
 				dto.setPrice(rs.getInt(4));
-				dto.setCompany(rs.getString(5));
+				dto.setCompany(rs.getString(5));				 
 				dtoList.add(dto);
 			}
-		} catch (Exception e) {
+			closeAll();
+		}catch (Exception e) {
 			e.printStackTrace();
-		}
+		}		
 		return dtoList;
+	}		
+	public void updateProduct(ProductDTO dto) {
+		
 	}
-	public void updateProduct(ProductDTO dto) {}
 	
 	
-	public void deleteProduct(int prodNo) {}
+	public void deleteProduct() {}
+
 }
