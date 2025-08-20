@@ -14,7 +14,9 @@ public class User2Service {
 	
 	private User2DAO dao = User2DAO.getInstance();
 	
-	public void register(User2DTO dto) {}
+	public void register(User2DTO dto) {
+		dao.insertUser2(dto);
+	}
 	public User2DTO findbyId(String user_id) {
 		return null;
 	}

@@ -9,8 +9,9 @@
 	<body>
 		<h3>User2 목록</h3>
 		
-		<a></a>
-		<a></a>
+		<a href="/ch09">처음으로</a>
+		<a href="/ch09/user2/register.do">등록하기</a>
+		
 		<table border="1">
 			<tr>
 				<th>아이디</th>
@@ -19,18 +20,18 @@
 				<th>나이</th>
 				<th>관리</th>
 			</tr>
-		</table>
-		<c:forEach var="dto" items="${requestScope.dtoList}">
+			<c:forEach var="dto" items="${dtoList}">
 			<tr>
-				<td>${dto.getUser_id}</td>
-				<td>${dto.getName}</td>
-				<td>${dto.getHp}</td>
-				<td>${dto.getAge}</td>
+				<td>${dto.user_id}</td>
+				<td>${dto.name}</td>
+				<td>${dto.hp}</td>
+				<td>${dto.age}</td>
 				<td>
-					<a></a>
-					<a></a>
+					<a href="">수정</a>
+					<a href="">삭제</a>
 				</td>
 			</tr>
-		</c:forEach>
+			</c:forEach>
+		</table>
 	</body>
 </html>

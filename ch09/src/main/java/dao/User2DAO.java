@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -20,7 +21,28 @@ public class User2DAO {
 	}
 	private User2DAO() {}
 	
-	public void insertUser2(User2DTO dto) {}
+	public void insertUser2(User2DTO dto) {
+		
+		try {
+			Context ctx = (Context) new InitialContext().lookup("java:comp/env");
+			DataSource ds = (DataSource) ctx.lookup("jdbc/tmfflavndn");
+			
+			Connection conn = ds.getConnection();
+			String sql = "INSERT INTO USER2 VALUES(?,?,?,?)";
+			PreparedStatement psmt = conn.prepareStatement(sql);
+			psmt.setString(1, dto.getUser_id());
+			psmt.setString(2, dto.getName());
+			psmt.setString(3, dto.getHp());
+			psmt.setInt(4, dto.getAge());
+			psmt.executeUpdate();
+			
+			psmt.close();
+			conn.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	public User2DTO selecttUser2(String user_id) {
 		return null;
 	}
