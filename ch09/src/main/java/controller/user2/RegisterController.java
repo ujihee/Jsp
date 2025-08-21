@@ -21,9 +21,10 @@ public class RegisterController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/user2/list.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/user2/register.jsp");
 		dispatcher.forward(req, resp);
 	}
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
@@ -40,7 +41,7 @@ public class RegisterController extends HttpServlet {
 		
 		service.register(dto);
 		
-		resp.sendRedirect("ch09/user2/list.do");
+		resp.sendRedirect("/ch09/user2/list.do");
 	}
 
 }

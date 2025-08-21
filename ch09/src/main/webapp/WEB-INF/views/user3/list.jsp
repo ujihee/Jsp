@@ -4,13 +4,13 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>user2::list</title>
+		<title>user3::list</title>
 	</head>
 	<body>
-		<h3>User2 목록</h3>
+		<h3>User3 목록</h3>
 		
 		<a href="/ch09">처음으로</a>
-		<a href="/ch09/user2/register.do">등록하기</a>
+		<a href="/ch09/user3/register.do">등록하기</a>
 		
 		<table border="1">
 			<tr>
@@ -27,8 +27,8 @@
 				<td>${dto.hp}</td>
 				<td>${dto.age}</td>
 				<td>
-					<a href="/ch09/user2/modify.do?user_id=${dto.user_id}">수정</a>
-					<a href="/ch09/user2/delete.do?user_id=${dto.user_id}">삭제</a>
+					<a href="/ch09/user3/modify.do?user_id=${dto.user_id}">수정</a>
+					<a href="/ch09/user3/delete.do?user_id=${dto.user_id}">삭제</a>
 				</td>
 			</tr>
 			</c:forEach>

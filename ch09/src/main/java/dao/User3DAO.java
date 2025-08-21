@@ -11,24 +11,25 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import dto.User2DTO;
+import dto.User3DTO;
 
-public class User2DAO {
+
+public class User3DAO {
 	
-	private final static User2DAO INSTANCE = new User2DAO();
-	public static User2DAO getInstance() {
+	private final static User3DAO INSTANCE = new User3DAO();
+	public static User3DAO getInstance() {
 		return INSTANCE;
 	}
-	private User2DAO() {}
+	private User3DAO() {}
 	
-	public void insertUser2(User2DTO dto) {
+	public void insertUser3(User3DTO dto) {
 		
 		try {
 			Context ctx = (Context) new InitialContext().lookup("java:comp/env");
 			DataSource ds = (DataSource) ctx.lookup("jdbc/tmfflavndn");
 			
 			Connection conn = ds.getConnection();
-			String sql = "INSERT INTO USER2 VALUES(?,?,?,?)";
+			String sql = "INSERT INTO USER3 VALUES(?,?,?,?)";
 			PreparedStatement psmt = conn.prepareStatement(sql);
 			psmt.setString(1, dto.getUser_id());
 			psmt.setString(2, dto.getName());
@@ -43,22 +44,22 @@ public class User2DAO {
 			e.printStackTrace();
 		}
 	}
-	public User2DTO selecttUser2(String user_id) {
+	public User3DTO selecttUser3(String user_id) {
 		
-		User2DTO dto = null;
+		User3DTO dto = null;
 		
 		try {
 			Context ctx = (Context) new InitialContext().lookup("java:comp/env");
 			DataSource ds = (DataSource) ctx.lookup("jdbc/tmfflavndn");
 			
 			Connection conn = ds.getConnection();
-			String sql = "SELECT * FROM USER2 WHERE USER_ID=?";
+			String sql = "SELECT * FROM USER3 WHERE USER_ID=?";
 			PreparedStatement psmt = conn.prepareStatement(sql);
 			psmt.setString(1, user_id);
 			ResultSet rs = psmt.executeQuery();
 			
 			if(rs.next()) {
-				dto = new User2DTO();
+				dto = new User3DTO();
 				dto.setUser_id(rs.getString(1));
 				dto.setName(rs.getString(2));
 				dto.setHp(rs.getString(3));
@@ -73,9 +74,9 @@ public class User2DAO {
 		}
 		return dto;
 	}
-	public List<User2DTO> selectAllUser2() {
+	public List<User3DTO> selectAllUser3() {
 		
-		List<User2DTO> dtoList = new ArrayList<>();
+		List<User3DTO> dtoList = new ArrayList<>();
 		
 		try {
 			Context ctx = (Context) new InitialContext().lookup("java:comp/env");
@@ -83,11 +84,11 @@ public class User2DAO {
 			
 			Connection conn = ds.getConnection();
 			Statement stmt = conn.createStatement();
-			String sql = "SELECT * FROM USER2";
+			String sql = "SELECT * FROM USER3";
 			ResultSet rs = stmt.executeQuery(sql);
 			
 			while(rs.next()) {
-				User2DTO dto = new User2DTO();
+				User3DTO dto = new User3DTO();
 				dto.setUser_id(rs.getString(1));
 				dto.setName(rs.getString(2));
 				dto.setHp(rs.getString(3));
@@ -102,13 +103,13 @@ public class User2DAO {
 	}
 		return dtoList;
 	}
-	public void updateUser2(User2DTO dto) {
+	public void updateUser3(User3DTO dto) {
 		try {
 			Context ctx = (Context) new InitialContext().lookup("java:comp/env");
 			DataSource ds = (DataSource) ctx.lookup("jdbc/tmfflavndn");
 			
 			Connection conn = ds.getConnection();
-			String sql = "UPDATE USER2 SET name=?, hp=?, age=? where user_id=?";
+			String sql = "UPDATE USER3 SET name=?, hp=?, age=? where user_id=?";
 			PreparedStatement psmt = conn.prepareStatement(sql);
 			psmt.setString(1, dto.getName());
 			psmt.setString(2, dto.getHp());
@@ -123,13 +124,13 @@ public class User2DAO {
 			e.printStackTrace();
 		}
 	}
-	public void deleteUser2(String user_id) {
+	public void deleteUser3(String user_id) {
 		try {
 			Context ctx = (Context) new InitialContext().lookup("java:comp/env");
 			DataSource ds = (DataSource) ctx.lookup("jdbc/tmfflavndn");
 			
 			Connection conn = ds.getConnection();
-			String sql = "DELETE FROM USER2 WHERE USER_ID =?";
+			String sql = "DELETE FROM USER3 WHERE USER_ID =?";
 			PreparedStatement psmt = conn.prepareStatement(sql);
 			psmt.setString(1, user_id);
 			psmt.executeUpdate();

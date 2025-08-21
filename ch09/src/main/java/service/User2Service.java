@@ -18,11 +18,15 @@ public class User2Service {
 		dao.insertUser2(dto);
 	}
 	public User2DTO findbyId(String user_id) {
-		return null;
+		return dao.selecttUser2(user_id);
 	}
 	public List<User2DTO> findAll() {
 		return dao.selectAllUser2();
 	}
-	public void modify(User2DTO dto) {}
-	public void delete(String user_id) {}
+	public void modify(User2DTO dto) {
+		dao.updateUser2(dto);
+	}
+	public void delete(String user_id) {
+		dao.deleteUser2(user_id);
+	}
 }

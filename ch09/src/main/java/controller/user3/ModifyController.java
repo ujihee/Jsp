@@ -1,33 +1,33 @@
-package controller.user2;
+package controller.user3;
 
 import java.io.IOException;
 
-import dto.User2DTO;
+import dto.User3DTO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import service.User2Service;
+import service.User3Service;
 
-@WebServlet("/user2/modify.do")
+@WebServlet("/user3/modify.do")
 public class ModifyController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	
-	private User2Service service = User2Service.getInstance(); 
+	private User3Service service = User3Service.getInstance(); 
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		String user_id = req.getParameter("user_id");
 		
-		User2DTO user2DTO = service.findbyId(user_id);
+		User3DTO user3DTO = service.findbyId(user_id);
 		
-		req.setAttribute("user2DTO", user2DTO);
+		req.setAttribute("user3DTO", user3DTO);
 		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/user2/modify.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/user3/modify.jsp");
 		dispatcher.forward(req, resp);
 	}
 	@Override
@@ -38,7 +38,7 @@ public class ModifyController extends HttpServlet {
 		String hp = req.getParameter("hp");
 		String age = req.getParameter("age");
 		
-		User2DTO dto = new User2DTO();
+		User3DTO dto = new User3DTO();
 		dto.setUser_id(user_id);
 		dto.setName(name);
 		dto.setHp(hp);
@@ -46,7 +46,7 @@ public class ModifyController extends HttpServlet {
 		
 		service.modify(dto);
 		
-		resp.sendRedirect("/ch09/user2/list.do");
+		resp.sendRedirect("/ch09/user3/list.do");
 		
 	}
 }
