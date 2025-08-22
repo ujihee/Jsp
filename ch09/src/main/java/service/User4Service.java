@@ -7,7 +7,10 @@ import dto.User4DTO;
 
 public class User4Service {
 	
-	private static User4Service service = new User4Service();
+	private static User4Service instance = new User4Service();
+	public static User4Service getInstance() {
+		return instance;
+	}
 	
 	private User4Service() {}
 	
