@@ -27,7 +27,7 @@ public class ModifyController extends HttpServlet {
 		
 		req.setAttribute("user3DTO", user3DTO);
 		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/user3/modify.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/user4/modify.jsp");
 		dispatcher.forward(req, resp);
 	}
 	@Override
@@ -46,7 +46,7 @@ public class ModifyController extends HttpServlet {
 		
 		service.modify(dto);
 		
-		resp.sendRedirect("/ch09/user3/list.do");
+		resp.sendRedirect("/ch09/user4/list.do");
 		
 	}
 }

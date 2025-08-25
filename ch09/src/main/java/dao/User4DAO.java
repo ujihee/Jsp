@@ -11,6 +11,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import dto.User2DTO;
 import dto.User4DTO;
 
 public class User4DAO {
@@ -44,7 +45,35 @@ public class User4DAO {
 		
 	}
 	public User4DTO selectUser4(String name) {
-		return null;
+		
+		User4DTO dto = null;
+		
+		try {
+			Context ctx = (Context) new InitialContext().lookup("java:comp/env");
+			DataSource ds = (DataSource) ctx.lookup("jdbc/tmfflavndn");
+			
+			Connection conn = ds.getConnection();
+			String sql = "SELECT * FROM USER4 WHERE NAME=?";
+			PreparedStatement psmt = conn.prepareStatement(sql);
+			psmt.setString(1, name);
+			ResultSet rs = psmt.executeQuery();
+				
+			if(rs.next()) {
+				dto = new User4DTO();
+				dto.setName(rs.getString(1));
+				dto.setGender(rs.getString(2));
+				dto.setAge(rs.getInt(3));
+				dto.setAddr(rs.getString(4));
+				
+				rs.close();
+				psmt.close();
+				conn.close();
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dto;
 	}
 	
 	public List<User4DTO> selectAllUser4() {
@@ -77,7 +106,42 @@ public class User4DAO {
 		}
 		return dtoList;
 	}
-	public void updateUser4(User4DTO dto) {}
-	public void deleteUser4(String name) {}
+	public void updateUser4(User4DTO dto) {
+		try {
+			Context ctx = (Context) new InitialContext().lookup("java:comp/env");
+			DataSource ds = (DataSource) ctx.lookup("jdbc/tmfflavndn");
+			
+			Connection conn = ds.getConnection();
+			String sql = "UPDATE USER4 SET GENDER=?, AGE=?, ADDR=? WHERE NAME=?";
+			PreparedStatement psmt= conn.prepareStatement(sql);
+			psmt.setString(1, dto.getGender());
+			psmt.setInt(2, dto.getAge());
+			psmt.setString(3, dto.getAddr());
+			psmt.setString(4, dto.getName());
+			psmt.executeUpdate();
+			
+			psmt.close();
+			conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void deleteUser4(String name) {
+		try {
+			Context ctx = (Context) new InitialContext().lookup("java:comp/env");
+			DataSource ds = (DataSource) ctx.lookup("jdbc/tmfflavndn");
+			
+			Connection conn = ds.getConnection();
+			String sql = "DELETE FROM USER4 WHERE NAME=?";
+			PreparedStatement psmt = conn.prepareStatement(sql);
+			psmt.setString(1, name);
+			psmt.executeUpdate();
+			
+			psmt.close();
+			conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 }
