@@ -24,6 +24,7 @@
 		
 		<h4>USER1 CRUD</h4>
 		<a href="/ch09/user1/list.do">user1 목록</a>
+		<a href="/ch09/js/user1/list.do">user1 목록</a>
 		
 		<h4>USER2 CRUD</h4>
 		<a href="/ch09/user2/list.do">user2 목록</a>
