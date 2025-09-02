@@ -40,7 +40,8 @@
 	    maxIdle="13"
 	    maxWaitMillis="3000"
    	/>
-   	<Resource
+<!--
+ <Resource
     	name="jdbc/shop"
     	auth="Container"
     	type="javax.sql.DataSource"
@@ -51,9 +52,8 @@
 	    maxTotal="13"
 	    maxIdle="13"
 	    maxWaitMillis="3000"
-   	/>
-   	
-   	 <Resource
+	/>	         
+	 <Resource
     	name="jdbc/college"
     	auth="Container"
     	type="javax.sql.DataSource"
@@ -64,8 +64,59 @@
 	    maxTotal="13"
 	    maxIdle="13"
 	    maxWaitMillis="3000"
+	    
+   	/>-->  
+  	
+   	 <Resource
+    	name="jdbc/shop"
+    	auth="Container"
+    	type="javax.sql.DataSource"
+    	driverClassName="oracle.jdbc.driver.OracleDriver"
+    	url="jdbc:oracle:thin:@localhost:1521:xe"
+    	username="shopERD"
+	    password="1234"
+	    maxTotal="13"
+	    maxIdle="13"
+	    maxWaitMillis="3000"
    	/>
-   
+     <Resource
+    	name="jdbc/college"
+    	auth="Container"
+    	type="javax.sql.DataSource"
+    	driverClassName="oracle.jdbc.driver.OracleDriver"
+    	url="jdbc:oracle:thin:@localhost:1521:xe"
+    	username="collegeERD"
+	    password="1234"
+	    maxTotal="13"
+	    maxIdle="13"
+	    maxWaitMillis="3000"
+   	/>
+   	  <Resource
+    	name="jdbc/bank"
+    	auth="Container"
+    	type="javax.sql.DataSource"
+    	driverClassName="oracle.jdbc.driver.OracleDriver"
+    	url="jdbc:oracle:thin:@localhost:1521:xe"
+    	username="bankERD"
+	    password="1234"
+	    maxTotal="13"
+	    maxIdle="13"
+	    maxWaitMillis="3000"
+   	/>
+   	<!-- dbeaver jboard -->
+   	
+   	   	<Resource
+    	name="jdbc/jboard"
+    	auth="Container"
+    	type="javax.sql.DataSource"
+    	driverClassName="oracle.jdbc.driver.OracleDriver"
+    	url="jdbc:oracle:thin:@localhost:1521:xe"
+    	username="jboard"
+	    password="1234"
+	    maxTotal="13"
+	    maxIdle="13"
+	    maxWaitMillis="3000"
+   	/>
       <Resource
     	name="jdbc/studydb"
     	auth="Container"
