@@ -6,17 +6,19 @@ import jboard.dto.TermsDTO;
 import jboard.util.DBHelper;
 import jboard.util.Sql;
 
-public class TermsDAO extends DBHelper{
+public class TermsDAO extends DBHelper {
 	
 	private final static TermsDAO INSTANCE = new TermsDAO();
 	public static TermsDAO getInstance() {
 		return INSTANCE;
-	}
+	}	
 	private TermsDAO() {}
+	
 	
 	public void insert(TermsDTO dto) {
 		
 	}
+	
 	public TermsDTO select(int no) {
 		
 		TermsDTO dto = null;
@@ -30,26 +32,27 @@ public class TermsDAO extends DBHelper{
 			rs = psmt.executeQuery();
 			
 			if(rs.next()) {
-			    dto = new TermsDTO();
+				dto = new TermsDTO();
 				dto.setNo(rs.getInt(1));
 				dto.setTerms(rs.getString(2));
 				dto.setPrivacy(rs.getString(3));
 			}
 			closeAll();
-			
-		} catch (Exception e) {
+		}catch (Exception e) {
 			e.printStackTrace();
-		}
+		}		
 		return dto;
 	}
-	public List<TermsDTO> selectAll(){
+	
+	public List<TermsDTO> selectAll() {
 		return null;
 	}
+	
 	public void update(TermsDTO dto) {
 		
 	}
+	
 	public void delete(int no) {
 		
 	}
-
 }

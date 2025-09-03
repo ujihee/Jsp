@@ -45,7 +45,7 @@ public class CheckUserController extends HttpServlet {
 		JsonObject json = new JsonObject();
 		json.addProperty("count", count);		
 		
-		// JSON 출력 
+		// JSON 출력 - 브라우저 주소창에 http://localhost:8080/jboard/user/check.do?col=uid&value=a101 테스트 확인
 		resp.setContentType("application/json; charset=UTF-8");
 		PrintWriter writer = resp.getWriter();
 		writer.print(json);
@@ -61,17 +61,11 @@ public class CheckUserController extends HttpServlet {
 		HttpSession session = req.getSession();
 		String sessAuthCode = (String) session.getAttribute("sessAuthCode");
 		
-		int result = 0;
-		
-		if(sessAuthCode.equals(code)) {
-			result = 1;
-		}else {
-			result = 0;
-		}		
+		boolean isMatched = sessAuthCode.equals(code);
 		
 		// JSON 생성
 		JsonObject json = new JsonObject();
-		json.addProperty("result", result);
+		json.addProperty("isMatched", isMatched);
 		
 		// JSON 출력
 		resp.setContentType("application/json; charset=UTF-8");
@@ -80,3 +74,17 @@ public class CheckUserController extends HttpServlet {
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

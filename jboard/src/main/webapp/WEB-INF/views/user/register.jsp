@@ -2,174 +2,7 @@
 <%@ include file="./_head.jsp" %>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="/jboard/js/postcode.js"></script>
-<script>
-	document.addEventListener('DOMContentLoaded', function(){
-		
-		const btnCheckUid = document.getElementById('btnCheckUid');
-		const btnCheckNick = document.getElementById('btnCheckNick');
-		const btnCheckEmail = document.getElementById('btnCheckEmail');
-		const btnEmailCode = document.getElementById('btnEmailCode');
-
-		const uidResult = document.getElementsByClassName('uidResult')[0];
-		const nickResult = document.getElementsByClassName('nickResult')[0];
-		const emailResult = document.getElementsByClassName('emailResult')[0];
-		const hpResult = document.getElementsByClassName('hpResult')[0];
-		
-		const auth = document.getElementsByClassName('auth')[0];
-		
-		const form = document.getElementsByTagName('form')[0];
-		
-		// 아이디 중복체크 요청
-		btnCheckUid.addEventListener('click', function(e){
-						
-			const uid = form.uid.value;
-			
-			console.log('uid : ' + uid);
-			
-			fetch('/jboard/user/check.do?col=uid&value='+uid)
-				.then(res => res.json())
-				.then(data => {
-					console.log(data);
-					if(data.count > 0){
-						uidResult.innerText = '이미 사용 중인 아이디 입니다.';
-						uidResult.style.color = 'red';
-					}else{
-						uidResult.innerText = '사용 가능한 아이디 입니다.';
-						uidResult.style.color = 'green';
-					}
-				})
-				.catch(err => {
-					console.log(err);
-				});
-		});
-		
-		// 별명 중복체크 요청
-		btnCheckNick.addEventListener('click', function(e){
-						
-			const value = form.nick.value;
-			
-			console.log('value : ' + value);
-			
-			fetch('/jboard/user/check.do?col=nick&value='+value)
-				.then(res => res.json())
-				.then(data => {
-					console.log(data);
-					if(data.count > 0){
-						nickResult.innerText = '이미 사용 중인 별명 입니다.';
-						nickResult.style.color = 'red';
-					}else{
-						nickResult.innerText = '사용 가능한 별명 입니다.';
-						nickResult.style.color = 'green';
-					}
-				})
-				.catch(err => {
-					console.log(err);
-				});
-		});
-		
-		
-		// 이메일 중복체크 요청
-		let preventDblClick = false;
-		
-		btnCheckEmail.addEventListener('click', function(e){
-						
-			// 이중 클릭 방지
-			if(preventDblClick){
-				return;
-			}
-						
-			const value = form.email.value;			
-			console.log('value : ' + value);
-			
-			// 이중 클릭 방지 실행
-			preventDblClick = true;
-			emailResult.innerText = '이메일로 인증코드 전송 중 입니다.';
-			emailResult.style.color = 'green';
-			
-			fetch('/jboard/user/check.do?col=email&value='+value)
-				.then(res => res.json())
-				.then(data => {
-					console.log(data);
-					
-					// 이중 클릭 방지 해제
-					preventDblClick = false;
-					
-					if(data.count > 0){
-						emailResult.innerText = '이미 사용 중인 이메일 입니다.';
-						emailResult.style.color = 'red';
-					}else{
-						emailResult.innerText = '이메일 인증번호를 입력하세요.';
-						emailResult.style.color = 'green';
-						
-						// 인증번호 입력 필드 띄우기
-						auth.style.display = 'block';						
-						
-					}
-				})
-				.catch(err => {
-					console.log(err);
-				});
-		});
-		
-		// 이메일 코드 전송 버튼 클릭
-		btnEmailCode.addEventListener('click', async function(e){
-			
-			const code = form.auth.value;
-			
-			// 쿼리 문자열 생성해서 POST body로 전송
-			const params = new URLSearchParams();
-			params.append("code", code);
-			
-			const response = await fetch('/jboard/user/check.do', {
-				method: 'POST',				
-				body: params
-			});
-			
-			const data = await response.json();
-			
-			console.log(data);
-			if(data.result > 0){
-				emailResult.innerText = '이메일이 인증되었습니다.';
-				emailResult.style.color = 'green';				
-			}else{
-				emailResult.innerText = '인증코드가 일치 않습니다.';
-				emailResult.style.color = 'red';
-			}
-		});
-		
-		
-		// 휴대폰 중복 체크 
-		form.hp.addEventListener('focusout', function(e){
-			const value = form.hp.value;
-			
-			console.log('value : ' + value);
-			
-			fetch('/jboard/user/check.do?col=hp&value='+value)
-				.then(res => res.json())
-				.then(data => {
-					console.log(data);
-					if(data.count > 0){
-						hpResult.innerText = '이미 사용 중인 휴대폰 입니다.';
-						hpResult.style.color = 'red';
-					}else{
-						hpResult.innerText = '사용 가능한 휴대폰 입니다.';
-						hpResult.style.color = 'green';
-					}
-				})
-				.catch(err => {
-					console.log(err);
-				});
-		});
-	}); // DOMContentLoaded 끝
-	
-	
-	
-	
-	
-	
-	
-</script>
-
+<script src="/jboard/js/validation.js"></script>
 <main id="user">
     <section class="register">
         <form action="/jboard/user/register.do" method="post">
@@ -185,7 +18,10 @@
                 </tr>
                 <tr>
                     <td>비밀번호</td>
-                    <td><input type="password" name="pass1" placeholder="비밀번호 입력"/></td>
+                    <td>
+                    	<input type="password" name="pass1" placeholder="비밀번호 입력"/>
+                    	<span class="passResult"></span>
+                    </td>
                 </tr>
                 <tr>
                     <td>비밀번호 확인</td>
@@ -198,7 +34,8 @@
                 <tr>
                     <td>이름</td>
                     <td>
-                        <input type="text" name="name" placeholder="이름 입력"/>                        
+                        <input type="text" name="name" placeholder="이름 입력"/>
+                        <span class="nameResult"></span>                        
                     </td>
                 </tr>
                 <tr>
@@ -234,7 +71,7 @@
                     <td>
                         <input type="text" id="zip" name="zip" readonly="readonly" placeholder="우편번호"/>
                         <button type="button" onclick="postcode()"><img src="../images/chk_post.gif" alt="우편번호찾기"/></button>
-                        <input type="text" id="addr1" name="addr1" placeholder="주소 검색"/>
+                        <input type="text" id="addr1" name="addr1" readonly="readonly" placeholder="주소 검색"/>
                         <input type="text" id="addr2" name="addr2" placeholder="상세주소 입력"/>
                     </td>
                 </tr>

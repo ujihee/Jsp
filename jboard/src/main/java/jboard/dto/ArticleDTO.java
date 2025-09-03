@@ -1,7 +1,7 @@
 package jboard.dto;
 
 public class ArticleDTO {
-	
+
 	private int ano;
 	private String cate;
 	private String title;
@@ -12,6 +12,15 @@ public class ArticleDTO {
 	private String writer;
 	private String reg_ip;
 	private String wdate;
+	
+	// 추가 필드
+	private String nick;
+	public String getNick() {
+		return nick;
+	}
+	public void setNick(String nick) {
+		this.nick = nick;
+	}
 	
 	public int getAno() {
 		return ano;
@@ -68,12 +77,11 @@ public class ArticleDTO {
 		this.reg_ip = reg_ip;
 	}
 	public String getWdate() {
-		return wdate;
+		return wdate.substring(2, 16);
 	}
 	public void setWdate(String wdate) {
 		this.wdate = wdate;
 	}
-	
 	@Override
 	public String toString() {
 		return "ArticleDTO [ano=" + ano + ", cate=" + cate + ", title=" + title + ", content=" + content
@@ -82,5 +90,5 @@ public class ArticleDTO {
 	}
 	
 	
-
+	
 }

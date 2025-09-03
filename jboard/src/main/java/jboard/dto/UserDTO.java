@@ -102,4 +102,5 @@ public class UserDTO {
 				+ addr2 + ", reg_ip=" + reg_ip + ", reg_date=" + reg_date + ", leave_date=" + leave_date + "]";
 	}
 
+	
 }

@@ -5,7 +5,6 @@ import java.util.List;
 import jboard.dao.TermsDAO;
 import jboard.dto.TermsDTO;
 
-
 public enum TermsService {
 	
 	INSTANCE;
@@ -14,8 +13,8 @@ public enum TermsService {
 	
 	public void register(TermsDTO dto) {
 		dao.insert(dto);
-	}
-	public TermsDTO findByID(int no) {
+	}	
+	public TermsDTO findById(int no) {
 		return dao.select(no);
 	}
 	public List<TermsDTO> findAll() {
@@ -23,9 +22,8 @@ public enum TermsService {
 	}
 	public void modify(TermsDTO dto) {
 		dao.update(dto);
-	}
-	public void delete(int no) {
+	}	
+	public void remove(int no) {
 		dao.delete(no);
 	}
-
 }
