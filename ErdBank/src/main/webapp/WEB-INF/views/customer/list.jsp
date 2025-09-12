@@ -25,13 +25,13 @@
 			
 			<c:forEach var="dto" items="${dtoList}">
 				<tr>
-					<td>${dto.lecNo}</td>
+					<td>${dto.lec_no}</td>
 					<td>${dto.lecName}</td>
 					<td>${dto.lecCredit}</td>
 					<td>${dto.lecTime}</td>
 					<td>${dto.lecClass}</td>
 					<td>					
-						<a href="/ErdCollege/register/request.do?lecNo=${dto.lecNo}">수강신청</a>					
+						<a href="/ErdCollege/register/request.do?lec_no=${dto.lec_no}">수강신청</a>					
 					</td>
 				</tr>
 			</c:forEach>	

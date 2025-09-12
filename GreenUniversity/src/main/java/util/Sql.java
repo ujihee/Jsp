@@ -28,12 +28,34 @@ public class Sql {
 	public final static String SEARCH_ORDER_ID = "ORDER BY ID DESC ";
 	public final static String SEARCH_OFFSET_ROW = "LIMIT 5 OFFSET ?";
 	
-	// manage - lecture SQL 작성 - 우지희
-	public static final String REGISTER_LECTURE = 
+	/*
+	 * 날짜 : 2025/09/08
+	 * 이름 : 우지희
+	 * 내용 : manage SQL 작성
+	 */
+	
+	// manage - lecture register 
+	public static final String REGISTER_LECTURE =
 		    "INSERT INTO tb_lecture " +
-		    "(lecNo, lenName, category, grade, semester, credit, description, " +
+		    "(lecNo, lenName, category, department, grade, semester, credit, professor, description, " +
 		    "start_date, end_date, start_time, end_time, day_of_week, evaluation, textbook, classroom, max_enrollment) " +
-		    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-	//managedao - getnextsequence
+		    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	
+	//manageDAO - getnextsequence
 	public static final String GET_NEXT_SEQUENCE = "SELECT COUNT(*) + 1 FROM tb_lecture WHERE lecNo LIKE ? ";
+	
+	
+	//managedao - list sql
+	public static final String SELECT_ALL_TB_LECTURE =
+		    "SELECT lecNo, department, grade, category, lenName, professor, credit, " +
+		    "CONCAT(day_of_week, ' ', start_time, ' ~ ', end_time) AS class_time, " +
+		    "classroom, max_enrollment " +
+		    "FROM tb_lecture";
+	
+	//managedao - opelist Sql
+	public static final String SELECT_ALL_LECTURE_WITH_ENROLLMENT = "SELECT lecNo, lenName, category, professor, day_of_week, start_time, end_time, classroom, max_enrollment, enrollment " +
+            "FROM tb_lecture " ;
+	
+	public static final String SELECT_COUNT_TOTAL = "SELECT COUNT(*) FROM tb_lecture";
+	
 }

@@ -5,7 +5,6 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-import dao.manageDAO;
 import dto.manage.LectureManageDTO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -45,10 +44,11 @@ public class RegisterController extends HttpServlet{
 
         try {
             // 폼 데이터 받기
-            String lenName = req.getParameter("lenName");
+            String lecName = req.getParameter("lecName");
             String college = req.getParameter("college");
             String department = req.getParameter("department");
             String grade = req.getParameter("grade");
+            String semester = req.getParameter("semester");
             String credit = req.getParameter("credit");
             String category = req.getParameter("category");
             String professor = req.getParameter("professor");
@@ -70,16 +70,16 @@ public class RegisterController extends HttpServlet{
             }
             
             // 과목코드 자동 생성
-            int lecNo = generateLecNo(department, grade);
-            
-            // 학기 정보 설정
-            String semester = getCurrentSemester();
+            int lecNo = generateLecNo(department, semester);
             
             // DTO 객체 생성 및 데이터 설정
             LectureManageDTO dto = new LectureManageDTO();
             dto.setLecNo(lecNo);
-            dto.setLenName(lenName);
+            dto.setLecName(lecName);
             dto.setCategory(category);
+            //추가 professor, department
+            dto.setProfessor(professor);
+            dto.setDepartment(department);
             dto.setGrade(grade);
             dto.setSemester(semester);
             dto.setCredit(credit);
@@ -97,22 +97,21 @@ public class RegisterController extends HttpServlet{
             manageService.registerLecture(dto);
             
             // 성공 메시지와 함께 리다이렉트
-            resp.sendRedirect("/operate/list.do?msg=success");
+            resp.sendRedirect("/manage/operate/list.do?msg=success");
             
         } catch (Exception e) {
             e.printStackTrace();
             // 에러 처리
             req.setAttribute("error", "강의 등록 중 오류가 발생했습니다: " + e.getMessage());
-            req.getRequestDispatcher("/operate/register.jsp").forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/views/manage/operate/register.jsp").forward(req, resp);
         }
     }
     
     // 과목코드 자동 생성 메소드
-    private int generateLecNo(String department, String grade) {
+    private int generateLecNo(String department, String semester) {
         // 학과코드 + 연도 + 학기 + 순번 조합으로 생성
         String deptCode = getDepartmentCode(department);
         String year = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
-        String semester = getCurrentSemester();
         
         int sequence = manageService.getNextSequence(deptCode, year, semester);
         
@@ -132,15 +131,7 @@ public class RegisterController extends HttpServlet{
         return deptMap.getOrDefault(department, "00");
     }
     
-    // 현재 학기 반환
-    private String getCurrentSemester() {
-        int month = Calendar.getInstance().get(Calendar.MONTH) + 1;
-        if (month >= 3 && month <= 8) {
-            return "1"; // 1학기
-        } else {
-            return "2"; // 2학기
-        }
 	
 	}
 
-}
+

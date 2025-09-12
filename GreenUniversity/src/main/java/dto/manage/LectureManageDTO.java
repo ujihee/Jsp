@@ -7,11 +7,13 @@ package dto.manage;
 
 public class LectureManageDTO {
     private int lecNo;               
-    private String lenName;          
-    private String category;         
+    private String lecName;          
+    private String category;
+    private String department;
     private String grade;           
     private String semester;         
-    private String credit;              
+    private String credit;
+    private String professor;
     private String description;     
     private String start_date;       
     private String end_date;         
@@ -22,6 +24,48 @@ public class LectureManageDTO {
     private String textbook;         
     private String classroom;        
     private String max_enrollment;
+    
+    // 수강신청인원(임시)
+    private String enrollment; 
+    
+    //수강률 계산
+    public double getEnrollmentRate() {
+        if(max_enrollment == null || max_enrollment.isEmpty() || enrollment == null || enrollment.isEmpty()) {
+            return 0;
+        }
+        return Double.parseDouble(enrollment) / Double.parseDouble(max_enrollment);
+    }
+    
+    //요일, 시간 합침
+    private String class_time;
+    
+    public String getEnrollment() {
+		return enrollment;
+	}
+    public void setEnrollment(String enrollment) {
+		this.enrollment = enrollment;
+	}
+    
+    public String getClass_time() {
+		return class_time;
+	}
+    public void setClass_time(String class_time) {
+		this.class_time = class_time;
+	}
+    
+    public void setDepartment(String department) {
+		this.department = department;
+	}
+    public String getDepartment() {
+		return department;
+	}
+    
+    public String getProfessor() {
+		return professor;
+	}
+    public void setProfessor(String professor) {
+		this.professor = professor;
+	}
 	
     public int getLecNo() {
 		return lecNo;
@@ -29,11 +73,11 @@ public class LectureManageDTO {
 	public void setLecNo(int lecNo) {
 		this.lecNo = lecNo;
 	}
-	public String getLenName() {
-		return lenName;
+	public String getLecName() {
+		return lecName;
 	}
-	public void setLenName(String lenName) {
-		this.lenName = lenName;
+	public void setLecName(String lecName) {
+		this.lecName = lecName;
 	}
 	public String getCategory() {
 		return category;
@@ -122,12 +166,13 @@ public class LectureManageDTO {
 	
 	@Override
 	public String toString() {
-		return "LectureManageDTO [lecNo=" + lecNo + ", lenName=" + lenName + ", category=" + category + ", grade="
+		return "LectureManageDTO [lecNo=" + lecNo + ", lecName=" + lecName + ", category=" + category + ", grade="
 				+ grade + ", semester=" + semester + ", credit=" + credit + ", description=" + description
 				+ ", start_date=" + start_date + ", end_date=" + end_date + ", start_time=" + start_time + ", end_time="
 				+ end_time + ", day_of_week=" + day_of_week + ", evaluation=" + evaluation + ", textbook=" + textbook
 				+ ", classroom=" + classroom + ", max_enrollment=" + max_enrollment + "]";
-	}     
+	}
+   
 	
 	
 	

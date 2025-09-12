@@ -30,6 +30,9 @@ public enum ManageService {
 	public List<LectureManageDTO> findAllLecture() {
 		return dao.selectAllLecture();
 	}
+	public List<LectureManageDTO> selectAllOpeState(){
+		return dao.selectAllOpeState();
+	}
 	public void modifyLecture(LectureManageDTO dto) {}
 	public void deleteLecture(int lecno) {}
 
